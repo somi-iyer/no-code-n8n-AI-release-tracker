@@ -1,5 +1,7 @@
 # Architecture
 
+![Workflow](docs/images/workflow.png)
+
 The project is three n8n workflows. Only the first runs every week.
 
 | Workflow | Purpose |
