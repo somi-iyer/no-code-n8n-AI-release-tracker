@@ -1,0 +1,1974 @@
+{
+  "name": "AI Release Tracker",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "weeks",
+              "triggerAtDay": [
+                1
+              ],
+              "triggerAtHour": 9
+            }
+          ]
+        }
+      },
+      "id": "970c584d-a0d3-4a71-84b3-38a2e6c8de7a",
+      "name": "Weekly Schedule",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        192
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "c443af3b-6e6d-4416-9d74-5eeffade4d30",
+              "name": "mode",
+              "value": "live",
+              "type": "string"
+            },
+            {
+              "id": "408e688f-252c-4fbb-bdb2-04c084efed91",
+              "name": "note",
+              "value": "Scheduled run",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "cfbd4e8c-f77d-4d3a-88a0-48bb0f207d7f",
+      "name": "Run Live",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        240,
+        192
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "b0048b1c-9f34-4043-ad55-c7cb6581b503",
+      "name": "Manual Test Run",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        416
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "6f90c9e5-57f6-4ffe-ae49-fa8dab818b88",
+              "name": "mode",
+              "value": "test",
+              "type": "string"
+            },
+            {
+              "id": "19d6bc7a-5189-4046-b000-c60c4c8dcd55",
+              "name": "note",
+              "value": "Manual test run",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "aee3e75b-1a2d-449e-b9f4-76b4de89df76",
+      "name": "Run Test",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        240,
+        416
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "e014c5ef-4683-4f6e-a0ed-26ceb5e1aec2",
+              "name": "test_source",
+              "value": "samples",
+              "type": "string"
+            },
+            {
+              "id": "4c1af69e-f730-418f-97ff-d14a5ea199f1",
+              "name": "lookback_days_live",
+              "value": 7,
+              "type": "number"
+            },
+            {
+              "id": "40f62829-2a77-4577-b450-57daed8fd614",
+              "name": "lookback_days_test",
+              "value": 30,
+              "type": "number"
+            },
+            {
+              "id": "e367f0c6-4740-4e85-b156-e55796625979",
+              "name": "max_items",
+              "value": 25,
+              "type": "number"
+            },
+            {
+              "id": "f5cc2b34-dd24-4946-be62-7486cd188078",
+              "name": "llm_base_url",
+              "value": "https://generativelanguage.googleapis.com/v1beta/openai",
+              "type": "string"
+            },
+            {
+              "id": "f7fe9911-86f5-4d56-b24a-5cd68b1e441c",
+              "name": "llm_model",
+              "value": "gemini-3.5-flash-lite",
+              "type": "string"
+            },
+            {
+              "id": "c6170ac5-487b-48a6-8fae-fb33c2396138",
+              "name": "request_gap_ms",
+              "value": 7000,
+              "type": "number"
+            },
+            {
+              "id": "e9bb0b13-a200-4cc5-b76c-d8e5fde6ae7e",
+              "name": "price_in_per_1m",
+              "value": 0,
+              "type": "number"
+            },
+            {
+              "id": "2bd2d1bb-8e0e-45ab-a773-1409dedfb9ef",
+              "name": "price_out_per_1m",
+              "value": 0,
+              "type": "number"
+            },
+            {
+              "id": "4eb4f754-fd50-4dd8-9848-8d5c7277e95c",
+              "name": "token_limit_per_run",
+              "value": 60000,
+              "type": "number"
+            },
+            {
+              "id": "89b6ee2d-bce4-4a7b-9249-770b49dcc394",
+              "name": "email_from",
+              "value": "you@example.com",
+              "type": "string"
+            },
+            {
+              "id": "4332bb1d-bd1a-439e-a228-5ba16c586af0",
+              "name": "email_to",
+              "value": "you@example.com",
+              "type": "string"
+            },
+            {
+              "id": "ff279f03-a9c2-48ae-9d29-b52efa7f442a",
+              "name": "run_id",
+              "value": "={{ $now.toFormat('yyyyLLdd-HHmmss') }}",
+              "type": "string"
+            },
+            {
+              "id": "49c59b54-0233-4f87-999d-90bd845a7c13",
+              "name": "prompt_item",
+              "value": "You are an AI product analyst helping a product manager track releases from AI companies. You will get one item with a title, date, link and text.\n\nRules:\n- Use ONLY the text given. Do not invent facts, prices, dates or model names.\n- If the text does not say enough, say so in so_what and set impact to Low.\n- Write short sentences in plain English.\n- Do not use em-dashes.\n\nReturn ONLY a JSON object. No markdown, no extra text. Keys:\ncategory: one of Model Release, Pricing and Limits, Deprecation, New Feature, Policy and Safety, Dev Tooling, Other\npm_lens: one of Build, Cost, Risk, Compete, Users\n  (Build = a new capability a PM could ship. Cost = changes unit economics or rate limits. Risk = breaking change, deprecation or policy shift. Compete = closes a gap or creates differentiation. Users = changes what users will expect.)\nurgency: one of Act now, Plan this quarter, Watch\nimpact: one of High, Medium, Low\nsummary: max 25 words\nso_what: one sentence on why this matters to a PM\naction: one short suggested next step for a PM",
+              "type": "string"
+            },
+            {
+              "id": "818d2813-f38b-4cf2-b5bf-49ed27fc05e2",
+              "name": "prompt_brief",
+              "value": "You write a weekly brief for an AI Product Manager. You get a JSON list of analysed items from this week.\n\nRules:\n- Use only that data. Never invent items, facts or links. Use each link exactly as given.\n- Do not invent personal experiences or claim anything was tested.\n- Do not use em-dashes, en-dashes or emojis.\n- Keep the whole brief under 2,800 characters including links and hashtags.\n- Write each link as plain text. No bold, no brackets, no markdown around links.\n- Mention exactly 5 items (or all items if fewer than 5 exist) and link only to those. Never list or link to any other item.\n\nVoice (match this):\n- Open with one plain line telling what the brief covers. No greeting, no hype.\n- Short lines. Use the arrow symbol → for points.\n- Simple words, like explaining to a smart colleague who is new to AI.\n\nStructure:\n1. Opening line mentioning the intent of the brief\n2. Exactly 5 items (fewer only if fewer exist), ranked by impact and urgency. For each: company and what changed, why it matters to PMs, then the link. Do not mention any other item.\n3. One line on which PM lens (Build, Cost, Risk, Compete, Users) showed up most this week.\n4. Do not include hashtags.",
+              "type": "string"
+            },
+            {
+              "id": "4072c82b-4e77-403f-96b3-f678ccb80c6a",
+              "name": "per_company_cap",
+              "value": 10,
+              "type": "number"
+            },
+            {
+              "id": "384cd173-0def-491d-94bd-c6fe9aec0224",
+              "name": "boost_keywords",
+              "value": "introducing,new,available,pricing,price,broadening,deprecat,retire,sunset,rate limit,limits,launch,release,policy,safety,breaking,enterprise",
+              "type": "string"
+            },
+            {
+              "id": "83968b41-690e-4581-8e00-85571b002a11",
+              "name": "demote_keywords",
+              "value": "hiring,careers,podcast,webinar,event,case study,customer story,award,grant,fellowship",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "id": "e1659c7a-d2e6-4fa8-913b-dcab36c82bb1",
+      "name": "Settings",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        480,
+        304
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "06a5a13d-7e07-4f30-899a-d60fbe926344",
+              "leftValue": "={{ $json.mode }}",
+              "rightValue": "test",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            },
+            {
+              "id": "3b96505b-a175-4974-b0c1-c78d0790e9e7",
+              "leftValue": "={{ $json.test_source }}",
+              "rightValue": "samples",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "d90d8ebc-b46f-4fb5-9d21-5510908c1df1",
+      "name": "Use Sample Items?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        720,
+        304
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "{\n \"samples\": [\n  {\n   \"company\": \"OpenAI\",\n   \"source\": \"Sample feed\",\n   \"title\": \"[SAMPLE] Price cut on flagship model API\",\n   \"link\": \"https://example.com/sample/1\",\n   \"date\": \"2026-01-05T10:00:00.000Z\",\n   \"snippet\": \"The input price for the flagship model drops by 40 percent starting next month. Output pricing is unchanged.\",\n   \"expected_category\": \"Pricing and Limits\"\n  },\n  {\n   \"company\": \"Anthropic\",\n   \"source\": \"Sample feed\",\n   \"title\": \"[SAMPLE] Older model retirement date announced\",\n   \"link\": \"https://example.com/sample/2\",\n   \"date\": \"2026-01-05T09:00:00.000Z\",\n   \"snippet\": \"The previous generation model will stop working on a fixed date. Developers must move to the newer model before then.\",\n   \"expected_category\": \"Deprecation\"\n  },\n  {\n   \"company\": \"Google\",\n   \"source\": \"Sample feed\",\n   \"title\": \"[SAMPLE] New multimodal model now available\",\n   \"link\": \"https://example.com/sample/3\",\n   \"date\": \"2026-01-04T10:00:00.000Z\",\n   \"snippet\": \"A new model handles text, image and audio in one request and is available in preview to all developers.\",\n   \"expected_category\": \"Model Release\"\n  },\n  {\n   \"company\": \"OpenAI\",\n   \"source\": \"Sample feed\",\n   \"title\": \"[SAMPLE] Shared workspaces for teams in the app\",\n   \"link\": \"https://example.com/sample/4\",\n   \"date\": \"2026-01-04T08:00:00.000Z\",\n   \"snippet\": \"Teams can now share chats and files in a common workspace with admin controls.\",\n   \"expected_category\": \"New Feature\"\n  },\n  {\n   \"company\": \"Anthropic\",\n   \"source\": \"Sample feed\",\n   \"title\": \"[SAMPLE] Updated usage policy for agents\",\n   \"link\": \"https://example.com/sample/5\",\n   \"date\": \"2026-01-03T10:00:00.000Z\",\n   \"snippet\": \"The usage policy now has new rules for autonomous agents that take actions on behalf of users.\",\n   \"expected_category\": \"Policy and Safety\"\n  },\n  {\n   \"company\": \"Google\",\n   \"source\": \"Sample feed\",\n   \"title\": \"[SAMPLE] New SDK version with streaming helpers\",\n   \"link\": \"https://example.com/sample/6\",\n   \"date\": \"2026-01-03T09:00:00.000Z\",\n   \"snippet\": \"The latest SDK release adds helpers for streaming responses and fixes several bugs.\",\n   \"expected_category\": \"Dev Tooling\"\n  },\n  {\n   \"company\": \"OpenAI\",\n   \"source\": \"Sample feed\",\n   \"title\": \"[SAMPLE] Price cut on flagship model API (duplicate)\",\n   \"link\": \"https://example.com/sample/1\",\n   \"date\": \"2026-01-05T10:00:00.000Z\",\n   \"snippet\": \"Same item repeated to test duplicate removal.\",\n   \"expected_category\": \"(should be removed)\"\n  },\n  {\n   \"company\": \"Anthropic\",\n   \"source\": \"Sample feed\",\n   \"title\": \"[SAMPLE] Rate limits raised for paid tiers\",\n   \"link\": \"https://example.com/sample/8\",\n   \"date\": \"2026-01-02T10:00:00.000Z\",\n   \"snippet\": \"Requests per minute limits are doubled for all paid tiers, effective immediately.\",\n   \"expected_category\": \"Pricing and Limits\"\n  },\n  {\n   \"company\": \"Google\",\n   \"source\": \"Sample feed\",\n   \"title\": \"[SAMPLE] We are hiring across research teams\",\n   \"link\": \"https://example.com/sample/9\",\n   \"date\": \"2026-01-02T09:00:00.000Z\",\n   \"snippet\": \"Open roles are listed on the careers page.\",\n   \"expected_category\": \"Other\"\n  },\n  {\n   \"company\": \"OpenAI\",\n   \"source\": \"Sample feed\",\n   \"title\": \"[SAMPLE] Short post with no body text\",\n   \"link\": \"https://example.com/sample/10\",\n   \"date\": \"2026-01-01T10:00:00.000Z\",\n   \"snippet\": \"\",\n   \"expected_category\": \"Other\"\n  },\n  {\n   \"company\": \"Anthropic\",\n   \"source\": \"Sample feed\",\n   \"title\": \"[SAMPLE] A look back at our year\",\n   \"link\": \"https://example.com/sample/11\",\n   \"date\": \"2026-01-01T09:00:00.000Z\",\n   \"snippet\": \"A general reflection on the year with no product changes announced.\",\n   \"expected_category\": \"Other\"\n  }\n ]\n}",
+        "options": {}
+      },
+      "id": "9fd817d5-1872-4f6f-a0d0-e7b50f0261a1",
+      "name": "Sample Items",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        960,
+        192
+      ]
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "samples",
+        "options": {}
+      },
+      "id": "16d2bf1e-4bd2-498c-bd11-0baf42f0b140",
+      "name": "Split Samples",
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        1200,
+        192
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "dataTableId": {
+          "__rl": true,
+          "mode": "name",
+          "value": "sources"
+        },
+        "matchType": "allConditions",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "enabled",
+              "condition": "isTrue"
+            }
+          ]
+        },
+        "returnAll": true
+      },
+      "id": "51e55d55-c97a-4281-8f05-e82ac38e0bec",
+      "name": "Load Sources",
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1,
+      "position": [
+        960,
+        416
+      ]
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.url }}",
+        "options": {}
+      },
+      "id": "a9903e9a-6d83-468a-bb18-b0f896d5b575",
+      "name": "Read Feed",
+      "type": "n8n-nodes-base.rssFeedRead",
+      "typeVersion": 1.2,
+      "position": [
+        1200,
+        416
+      ],
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "0b3b9cc2-80f0-4d52-b400-8a17ba943d58",
+              "name": "company",
+              "value": "={{ $('Load Sources').item.json.company }}",
+              "type": "string"
+            },
+            {
+              "id": "67319c36-ebb1-44cb-96dd-0929c262c2d5",
+              "name": "source",
+              "value": "={{ $('Load Sources').item.json.name }}",
+              "type": "string"
+            },
+            {
+              "id": "35b7aebb-340b-4b14-a575-5d81e4f1ae8d",
+              "name": "title",
+              "value": "={{ $json.title }}",
+              "type": "string"
+            },
+            {
+              "id": "e8c688e7-ec14-4ed4-ab51-604d264621e5",
+              "name": "link",
+              "value": "={{ $json.link }}",
+              "type": "string"
+            },
+            {
+              "id": "0055fcb0-0856-4eb9-900d-f305b834079d",
+              "name": "date",
+              "value": "={{ $json.isoDate || $json.pubDate }}",
+              "type": "string"
+            },
+            {
+              "id": "8d0f3219-963d-4236-9087-389d4491ef90",
+              "name": "snippet",
+              "value": "={{ ($json.contentSnippet || $json.content || '').substring(0, 1500) }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "bf9133a6-1e7c-4d37-b4cf-4c4cd3f8732b",
+      "name": "Tag Source",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1440,
+        416
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "1a4baaa2-6ea2-4366-b261-9f8d4c68e702",
+              "leftValue": "={{ $json.link }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "dd9d9b52-045e-4c58-8b05-b03876e62c62",
+              "leftValue": "={{ $json.date }}",
+              "rightValue": "={{ $now.minus({ days: ($('Settings').first().json.mode === 'test' ? $('Settings').first().json.lookback_days_test : $('Settings').first().json.lookback_days_live) }).toISO() }}",
+              "operator": {
+                "type": "dateTime",
+                "operation": "after"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "b88d64f1-fe6b-4f07-a83d-cc97eb9c7d9e",
+      "name": "Last N Days",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.2,
+      "position": [
+        1680,
+        416
+      ]
+    },
+    {
+      "parameters": {
+        "compare": "selectedFields",
+        "fieldsToCompare": "link",
+        "options": {}
+      },
+      "id": "c8dbb780-f5bb-4b3d-adec-3d5a08f211a6",
+      "name": "Remove Duplicates",
+      "type": "n8n-nodes-base.removeDuplicates",
+      "typeVersion": 2,
+      "position": [
+        1856,
+        304
+      ]
+    },
+    {
+      "parameters": {
+        "maxItems": "={{ $('Settings').first().json.max_items }}"
+      },
+      "id": "6a91af6c-d954-4460-a5f9-4e11d149819a",
+      "name": "Cap Items",
+      "type": "n8n-nodes-base.limit",
+      "typeVersion": 1,
+      "position": [
+        2400,
+        304
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $('Settings').first().json.llm_base_url }}/chat/completions",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ model: $('Settings').first().json.llm_model, temperature: 0.2, messages: [{ role: 'system', content: $('Settings').first().json.prompt_item }, { role: 'user', content: 'Company: ' + $json.company + '\\nSource: ' + $json.source + '\\nTitle: ' + $json.title + '\\nDate: ' + $json.date + '\\nLink: ' + $json.link + '\\nText: ' + ($json.snippet || '(no text provided)') } ] }) }}",
+        "options": {
+          "batching": {
+            "batch": {
+              "batchSize": 1,
+              "batchInterval": "={{ $('Settings').first().json.request_gap_ms }}"
+            }
+          },
+          "timeout": 120000
+        }
+      },
+      "id": "5c76b27a-0db5-4aa4-9149-a87430054e2d",
+      "name": "Analyze Item",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2640,
+        304
+      ],
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 20000
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "835228fc-0b8d-4c3d-bf5e-180032943249",
+              "name": "r",
+              "value": "={{ JSON.parse($json.choices[0].message.content.replace(/```json|```/g, '').trim()) }}",
+              "type": "object"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "id": "535b337c-92b3-4139-9d99-9fdf3cd19bfa",
+      "name": "Parse Reply",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        2880,
+        304
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "c04af355-de1b-44f7-951a-330181398e78",
+              "name": "company",
+              "value": "={{ $('Cap Items').item.json.company }}",
+              "type": "string"
+            },
+            {
+              "id": "db3ff6fe-3fce-4817-aa90-55dbddbce53b",
+              "name": "title",
+              "value": "={{ $('Cap Items').item.json.title }}",
+              "type": "string"
+            },
+            {
+              "id": "953004d9-744a-48bb-a501-7f17cc42c5a2",
+              "name": "link",
+              "value": "={{ $('Cap Items').item.json.link }}",
+              "type": "string"
+            },
+            {
+              "id": "69abf349-fea5-410e-83ef-1ee703a8e717",
+              "name": "expected_category",
+              "value": "={{ $('Cap Items').item.json.expected_category || '' }}",
+              "type": "string"
+            },
+            {
+              "id": "fb142831-cdca-40dc-99d8-e8a8c13b22d6",
+              "name": "category",
+              "value": "={{ $json.r.category }}",
+              "type": "string"
+            },
+            {
+              "id": "c8297695-387d-4750-837c-9d7451b6b7c1",
+              "name": "pm_lens",
+              "value": "={{ $json.r.pm_lens }}",
+              "type": "string"
+            },
+            {
+              "id": "0e5b3451-0867-45bb-83ba-5f619cd6ef89",
+              "name": "urgency",
+              "value": "={{ $json.r.urgency }}",
+              "type": "string"
+            },
+            {
+              "id": "bd205f0c-0027-46a8-9667-57438d3a64c4",
+              "name": "impact",
+              "value": "={{ $json.r.impact }}",
+              "type": "string"
+            },
+            {
+              "id": "b1061d8a-4e87-4d9d-8683-de73d539cdf6",
+              "name": "summary",
+              "value": "={{ $json.r.summary }}",
+              "type": "string"
+            },
+            {
+              "id": "d9077b3b-4bdf-4450-87f2-bd507e69e5db",
+              "name": "so_what",
+              "value": "={{ $json.r.so_what }}",
+              "type": "string"
+            },
+            {
+              "id": "e9cafa0a-3463-4a40-bd05-33d2928d59fb",
+              "name": "action",
+              "value": "={{ $json.r.action }}",
+              "type": "string"
+            },
+            {
+              "id": "cf72f90b-3053-4b78-807e-1b84b7e9d01d",
+              "name": "prompt_tokens",
+              "value": "={{ Number($json.usage?.prompt_tokens || 0) }}",
+              "type": "number"
+            },
+            {
+              "id": "ff018543-a902-4eb9-81b5-b960b829fee0",
+              "name": "completion_tokens",
+              "value": "={{ Number($json.usage?.completion_tokens || 0) }}",
+              "type": "number"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "24b050e6-dd92-40fd-9fc6-00fbc7c08611",
+      "name": "Shape Item",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        3120,
+        304
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "cf422e97-6a93-4a3f-9ab1-4ec0baf9bbb5",
+              "name": "run_id",
+              "value": "={{ $('Settings').first().json.run_id }}",
+              "type": "string"
+            },
+            {
+              "id": "09984093-0270-4f9b-a53e-e2bbe585b09b",
+              "name": "mode",
+              "value": "={{ $('Settings').first().json.mode }}",
+              "type": "string"
+            },
+            {
+              "id": "b8a0e499-6424-4923-9a50-7d8c1628a064",
+              "name": "step",
+              "value": "item",
+              "type": "string"
+            },
+            {
+              "id": "25d850fe-77e4-4204-9ddb-87b0795d5e4b",
+              "name": "model",
+              "value": "={{ $('Settings').first().json.llm_model }}",
+              "type": "string"
+            },
+            {
+              "id": "8a7ade42-8d0d-40f9-be58-eb6bc44e07e5",
+              "name": "company",
+              "value": "={{ $json.company }}",
+              "type": "string"
+            },
+            {
+              "id": "306986b7-fa86-46ed-9bc9-e334fb706b07",
+              "name": "title",
+              "value": "={{ $json.title }}",
+              "type": "string"
+            },
+            {
+              "id": "da33fe16-e61a-41ca-82fe-16bac721355b",
+              "name": "link",
+              "value": "={{ $json.link }}",
+              "type": "string"
+            },
+            {
+              "id": "a22ccb64-befc-4814-9415-9e276fec6af8",
+              "name": "category",
+              "value": "={{ $json.category }}",
+              "type": "string"
+            },
+            {
+              "id": "38a2ca53-59c4-47c5-88ce-e50f33360563",
+              "name": "pm_lens",
+              "value": "={{ $json.pm_lens }}",
+              "type": "string"
+            },
+            {
+              "id": "f26b4da2-d4a0-407a-b169-844750dbdf7e",
+              "name": "urgency",
+              "value": "={{ $json.urgency }}",
+              "type": "string"
+            },
+            {
+              "id": "0208dc2a-4844-4eec-ab2e-c2bf18d0b7e1",
+              "name": "impact",
+              "value": "={{ $json.impact }}",
+              "type": "string"
+            },
+            {
+              "id": "513935fe-6970-445f-a42f-212b05a606ec",
+              "name": "so_what",
+              "value": "={{ $json.so_what }}",
+              "type": "string"
+            },
+            {
+              "id": "19726006-acf1-4487-a422-3f91133c8251",
+              "name": "prompt_tokens",
+              "value": "={{ $json.prompt_tokens }}",
+              "type": "number"
+            },
+            {
+              "id": "2fa967e2-670b-41bd-ae15-bb46dd35322f",
+              "name": "completion_tokens",
+              "value": "={{ $json.completion_tokens }}",
+              "type": "number"
+            },
+            {
+              "id": "cc626adb-637e-4f88-97a8-3150aba24561",
+              "name": "est_cost_usd",
+              "value": "={{ ($json.prompt_tokens * $('Settings').first().json.price_in_per_1m + $json.completion_tokens * $('Settings').first().json.price_out_per_1m) / 1000000 }}",
+              "type": "number"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "5935739b-7105-4a36-adb5-c417122604b6",
+      "name": "Item Log Row",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        3360,
+        496
+      ]
+    },
+    {
+      "parameters": {
+        "dataTableId": {
+          "__rl": true,
+          "mode": "name",
+          "value": "llm_log"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {},
+          "matchingColumns": [],
+          "schema": []
+        },
+        "options": {}
+      },
+      "id": "ffc90acf-b732-4673-9d9e-ef2c83dd0bbb",
+      "name": "Log Item",
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1,
+      "position": [
+        3600,
+        496
+      ]
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "destinationFieldName": "items",
+        "options": {}
+      },
+      "id": "2b733bdd-8156-4a34-8f0f-544d305df741",
+      "name": "Pack Items",
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        3360,
+        304
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $('Settings').first().json.llm_base_url }}/chat/completions",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ model: $('Settings').first().json.llm_model, temperature: 0.4, messages: [{ role: 'system', content: $('Settings').first().json.prompt_brief }, { role: 'user', content: 'Items this week (JSON):\\n' + JSON.stringify($json.items.map(i => ({ company: i.company, title: i.title, link: i.link, category: i.category, pm_lens: i.pm_lens, urgency: i.urgency, impact: i.impact, summary: i.summary, so_what: i.so_what, action: i.action }))) } ] }) }}",
+        "options": {
+          "timeout": 120000
+        }
+      },
+      "id": "643cb9ef-6abf-45b4-a21d-4ef41c7d47f2",
+      "name": "Write Brief",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        3600,
+        304
+      ],
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 20000
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "c5d7407f-50ff-4c2a-a57b-7fd2a44ae9f1",
+              "name": "brief_text",
+              "value": "={{ $json.choices[0].message.content.replace(/\\s*[—–]\\s*/g, ', ').trim() }}",
+              "type": "string"
+            },
+            {
+              "id": "8653ce1d-c807-4064-b2b0-4918fca52f85",
+              "name": "char_count",
+              "value": "={{ $json.choices[0].message.content.replace(/\\s*[—–]\\s*/g, ', ').trim().length }}",
+              "type": "number"
+            },
+            {
+              "id": "7c4c0d62-870b-4490-9ef7-bb859b2dbd33",
+              "name": "brief_prompt_tokens",
+              "value": "={{ Number($json.usage?.prompt_tokens || 0) }}",
+              "type": "number"
+            },
+            {
+              "id": "b0da7125-09b6-454e-aec3-0a2005e7401c",
+              "name": "brief_completion_tokens",
+              "value": "={{ Number($json.usage?.completion_tokens || 0) }}",
+              "type": "number"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "55d922ae-3159-44d0-8b09-e146b28d6f2d",
+      "name": "Clean Brief",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        3840,
+        304
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "60275bca-6e2e-4ac3-b60c-022dadfc9b7a",
+              "name": "run_id",
+              "value": "={{ $('Settings').first().json.run_id }}",
+              "type": "string"
+            },
+            {
+              "id": "ba933022-5d91-4f38-a7d8-ddcd97baabbf",
+              "name": "mode",
+              "value": "={{ $('Settings').first().json.mode }}",
+              "type": "string"
+            },
+            {
+              "id": "95e5d0b0-b552-43bd-b7c9-5e4e6b3d50e8",
+              "name": "step",
+              "value": "brief",
+              "type": "string"
+            },
+            {
+              "id": "c9a93e0a-970c-495a-a908-3c91c0c592ec",
+              "name": "model",
+              "value": "={{ $('Settings').first().json.llm_model }}",
+              "type": "string"
+            },
+            {
+              "id": "5e9658bc-6d36-4181-bce6-ff4862661a8d",
+              "name": "company",
+              "value": "",
+              "type": "string"
+            },
+            {
+              "id": "9405dc8a-b8b1-49e2-bf5d-e09d3cb643fc",
+              "name": "title",
+              "value": "Weekly brief",
+              "type": "string"
+            },
+            {
+              "id": "9b1005c5-73fc-4ade-aa06-2c4703e8bd94",
+              "name": "link",
+              "value": "",
+              "type": "string"
+            },
+            {
+              "id": "e1483423-9ef7-49b6-b8a7-f261115ae073",
+              "name": "category",
+              "value": "",
+              "type": "string"
+            },
+            {
+              "id": "bc9b2b32-d961-412e-83f3-6d7d12b17737",
+              "name": "pm_lens",
+              "value": "",
+              "type": "string"
+            },
+            {
+              "id": "d284a0de-603e-4c36-81f7-8fab4824d32a",
+              "name": "urgency",
+              "value": "",
+              "type": "string"
+            },
+            {
+              "id": "9cabb50b-cb8a-43fe-8bfb-f38dac6f5811",
+              "name": "impact",
+              "value": "",
+              "type": "string"
+            },
+            {
+              "id": "bba28a3f-a284-4130-8b84-4b14551f2880",
+              "name": "so_what",
+              "value": "",
+              "type": "string"
+            },
+            {
+              "id": "8c7f04d8-1203-45ce-a002-a725ecfd4d13",
+              "name": "prompt_tokens",
+              "value": "={{ $json.brief_prompt_tokens }}",
+              "type": "number"
+            },
+            {
+              "id": "45d6ab6c-fb25-431c-8f5b-a6c1f3d3f747",
+              "name": "completion_tokens",
+              "value": "={{ $json.brief_completion_tokens }}",
+              "type": "number"
+            },
+            {
+              "id": "39be8a4e-609c-4e4f-81af-0cdb12bb1526",
+              "name": "est_cost_usd",
+              "value": "={{ ($json.brief_prompt_tokens * $('Settings').first().json.price_in_per_1m + $json.brief_completion_tokens * $('Settings').first().json.price_out_per_1m) / 1000000 }}",
+              "type": "number"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "d8c35511-3fd4-4559-a1e8-bb09b0b9f09b",
+      "name": "Brief Log Row",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        4080,
+        496
+      ]
+    },
+    {
+      "parameters": {
+        "dataTableId": {
+          "__rl": true,
+          "mode": "name",
+          "value": "llm_log"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "run_id",
+              "displayName": "run_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "mode",
+              "displayName": "mode",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "step",
+              "displayName": "step",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "model",
+              "displayName": "model",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "company",
+              "displayName": "company",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "title",
+              "displayName": "title",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "link",
+              "displayName": "link",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "category",
+              "displayName": "category",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "pm_lens",
+              "displayName": "pm_lens",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "urgency",
+              "displayName": "urgency",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "impact",
+              "displayName": "impact",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "so_what",
+              "displayName": "so_what",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "prompt_tokens",
+              "displayName": "prompt_tokens",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "completion_tokens",
+              "displayName": "completion_tokens",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "est_cost_usd",
+              "displayName": "est_cost_usd",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "851b9825-5393-464c-80d6-5bc5aa905f22",
+      "name": "Log Brief",
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1,
+      "position": [
+        4320,
+        496
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "ba752033-514f-4574-9d8d-8a145b51cd94",
+              "name": "tokens_in",
+              "value": "={{ $('Pack Items').first().json.items.reduce((s, i) => s + Number(i.prompt_tokens || 0), 0) + Number($json.brief_prompt_tokens || 0) }}",
+              "type": "number"
+            },
+            {
+              "id": "f89a755d-5e59-4a72-a588-1d3a870528bb",
+              "name": "tokens_out",
+              "value": "={{ $('Pack Items').first().json.items.reduce((s, i) => s + Number(i.completion_tokens || 0), 0) + Number($json.brief_completion_tokens || 0) }}",
+              "type": "number"
+            },
+            {
+              "id": "b98e8b3a-defc-434a-b777-fcf2517f850c",
+              "name": "item_count",
+              "value": "={{ $('Pack Items').first().json.items.length }}",
+              "type": "number"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "id": "026fc85a-a420-4541-978f-dbf5e35a35bb",
+      "name": "Run Stats",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        4288,
+        192
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "fe2e8f60-65ed-4de6-8fed-a18e2bf7cb61",
+              "name": "subject",
+              "value": "={{ ($('Settings').first().json.mode === 'test' ? '[TEST] ' : '') + ($json.checks_failed > 0 ? '[CHECK FAILED] ' : '') + (($json.tokens_in + $json.tokens_out) > $('Settings').first().json.token_limit_per_run ? '[TOKEN LIMIT HIT] ' : '') + ($json.char_count > 3000 ? '[OVER 3000 CHARS] ' : '') + 'AI release brief: ' + $now.toFormat('dd LLL yyyy') }}",
+              "type": "string"
+            },
+            {
+              "id": "1af9fbfe-2e6e-4f4f-9f58-f1345d1f92c8",
+              "name": "body",
+              "value": "={{ 'Characters: ' + $json.char_count + ' / 3000\\n\\n' + $json.brief_text + '\\n\\n=== ALL ITEMS (' + $json.item_count + ') ===\\n' + $('Pack Items').first().json.items.map(i => '[' + i.category + ' | ' + i.pm_lens + ' | ' + i.urgency + ' | ' + i.impact + '] ' + i.company + ': ' + i.title + (i.expected_category ? '  (expected: ' + i.expected_category + ')' : '') + '\\n' + i.link).join('\\n\\n') + '\\n\\n=== COVERAGE ===\\nFetched after date filter and duplicates: ' + $('Remove Duplicates').all().length + '\\nAnalysed: ' + $('Cap Items').all().length + '\\nNot analysed: ' + $('Rank In Company').all().filter(x => !$('Cap Items').all().some(y => y.json.link === x.json.link)).sort((a, b) => b.json.priority - a.json.priority).length + '\\nTop 10 not-analysed items by priority score:\\n' + $('Rank In Company').all().filter(x => !$('Cap Items').all().some(y => y.json.link === x.json.link)).sort((a, b) => b.json.priority - a.json.priority).slice(0, 10).map(x => '- [' + x.json.company + '] ' + x.json.title + ' (score ' + x.json.score + ', ' + (x.json.company_rank >= $('Settings').first().json.per_company_cap ? 'cut by per-company cap' : 'cut by overall cap') + ')').join('\\n') + '\\n\\n=== RULE CHECKS (' + (9 - $json.checks_failed) + ' of 9 passed) ===\\n' + $json.checks_report + '\\n\\n=== RUN STATS ===\\nMode: ' + $('Settings').first().json.mode + '\\nModel: ' + $('Settings').first().json.llm_model + '\\nTokens in / out: ' + $json.tokens_in + ' / ' + $json.tokens_out + '\\nEstimated cost (USD): ' + (($json.tokens_in * $('Settings').first().json.price_in_per_1m + $json.tokens_out * $('Settings').first().json.price_out_per_1m) / 1000000).toFixed(4) }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "cc834e5b-29cb-4560-9cd5-0a550815203a",
+      "name": "Compose Email",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        4528,
+        192
+      ]
+    },
+    {
+      "parameters": {
+        "fromEmail": "={{ $('Settings').first().json.email_from }}",
+        "toEmail": "={{ $('Settings').first().json.email_to }}",
+        "subject": "={{ $json.subject }}",
+        "emailFormat": "text",
+        "text": "={{ $json.body }}",
+        "options": {}
+      },
+      "id": "cf0c960b-a7ef-4c9b-9a56-f5ff35c4c72f",
+      "name": "Send Email",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        4768,
+        192
+      ]
+    },
+    {
+      "parameters": {
+        "content": "SETTINGS\nEdit the Settings node to change lookback days, email, limits, boost and demote keywords and prompts. Nothing else needs touching.",
+        "height": 170,
+        "width": 340,
+        "color": 4
+      },
+      "id": "b9c74f2f-22fe-46ea-a7d0-935ce64cb2c6",
+      "name": "Note: SETTINGS",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        448,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "content": "TEST MODES\nManual run = test. Set test_source to samples (no feeds, no waiting) or feeds (real feeds, 30 day lookback). Scheduled run = live. Hover over correct trigger and click execute workflow.",
+        "height": 170,
+        "width": 400,
+        "color": 4
+      },
+      "id": "35f4c7de-21d0-4bb0-954e-548cf5e01b83",
+      "name": "Note: TEST MODES",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "content": "ADD AN AI PRODUCT THAT YOU NEED YOUR EYES ON\nOpen the sources data table and add a row: company, name, RSS url, enabled = true. No workflow change needed.",
+        "height": 150,
+        "width": 360,
+        "color": 4
+      },
+      "id": "f6848704-6c5e-449f-ba16-dcb8da3fa6ee",
+      "name": "Note: ADD A PRODUCT",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        960,
+        608
+      ]
+    },
+    {
+      "parameters": {
+        "content": "SWITCH LLM\nChange llm_base_url and llm_model in Settings, then put the new key in the LLM API Key credential. ",
+        "height": 96,
+        "width": 420,
+        "color": 4
+      },
+      "id": "ea9107d1-ff8e-4067-84bb-de48582fd338",
+      "name": "Note: SWITCH LLM",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        400,
+        576
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "b7843b0f-6443-4776-9c19-081082f7aae2",
+              "name": "urls",
+              "value": "={{ (($json.brief_text.match(/https?:\\/\\/[^\\s)>\\]\"']+/g)) || []).map(u => u.replace(/[*_.,;:!?)\\]]+$/, '').replace(/\\/$/, '')) }}",
+              "type": "array"
+            },
+            {
+              "id": "a78e3c3a-abf4-4cc7-9441-7dc99ea4cbbe",
+              "name": "item_links",
+              "value": "={{ $('Pack Items').first().json.items.map(i => i.link.replace(/\\/$/, '')) }}",
+              "type": "array"
+            },
+            {
+              "id": "e5251819-471a-49db-9d5d-66e888f88970",
+              "name": "corpus",
+              "value": "={{ $('Cap Items').all().map(i => (i.json.title + ' ' + i.json.snippet)).join(' ') + ' ' + $('Pack Items').first().json.items.map(i => i.summary + ' ' + i.so_what + ' ' + i.action).join(' ') }}",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "id": "2ab5449a-e21a-4a11-a584-a7e7f8b113de",
+      "name": "Prep Checks",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        4480,
+        -96
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "30862612-9d79-49c0-bd94-da86ae1f98d3",
+              "name": "chk_length",
+              "value": "={{ $json.char_count <= 3000 }}",
+              "type": "boolean"
+            },
+            {
+              "id": "f4031773-53f6-49af-9f7d-3b33db3a4d9e",
+              "name": "chk_no_dashes",
+              "value": "={{ !/[\\u2014\\u2013]/.test($json.brief_text) }}",
+              "type": "boolean"
+            },
+            {
+              "id": "f3963374-2b62-4e46-9ef5-66969ade7855",
+              "name": "chk_no_hashtags",
+              "value": "={{ !/#\\w/.test($json.brief_text) }}",
+              "type": "boolean"
+            },
+            {
+              "id": "2661f143-3e70-4565-b785-c95f73b04ee2",
+              "name": "chk_links_real",
+              "value": "={{ $json.urls.length > 0 && $json.urls.every(u => $json.item_links.includes(u)) }}",
+              "type": "boolean"
+            },
+            {
+              "id": "40709587-394e-44d1-898c-dc8383e89d0c",
+              "name": "chk_top5",
+              "value": "={{ new Set($json.urls).size <= 5 }}",
+              "type": "boolean"
+            },
+            {
+              "id": "e774af4a-75ca-428f-874c-11673bd63b7b",
+              "name": "chk_tags_valid",
+              "value": "={{ $('Pack Items').first().json.items.every(i => ['Model Release','Pricing and Limits','Deprecation','New Feature','Policy and Safety','Dev Tooling','Other'].includes(i.category) && ['Build','Cost','Risk','Compete','Users'].includes(i.pm_lens) && ['Act now','Plan this quarter','Watch'].includes(i.urgency) && ['High','Medium','Low'].includes(i.impact)) }}",
+              "type": "boolean"
+            },
+            {
+              "id": "ab534d34-7a1b-4dc8-82e5-fd2c5079c60e",
+              "name": "chk_fields_filled",
+              "value": "={{ $('Pack Items').first().json.items.every(i => i.summary && i.so_what && i.action) }}",
+              "type": "boolean"
+            },
+            {
+              "id": "c36742e9-13a4-40eb-bf18-8bfe666c95ee",
+              "name": "chk_no_dup_links",
+              "value": "={{ new Set($json.item_links).size === $json.item_links.length }}",
+              "type": "boolean"
+            },
+            {
+              "id": "867c4cc0-8636-449d-8c97-85dbef1598e9",
+              "name": "chk_all_processed",
+              "value": "={{ $json.item_count === $('Cap Items').all().length }}",
+              "type": "boolean"
+            },
+            {
+              "id": "0fb6b888-36ab-435e-b85f-79c5ad4824ee",
+              "name": "chk_numbers_grounded",
+              "value": "={{ (($json.brief_text.replace(/https?:\\/\\/\\S+/g, '').match(/\\$\\d[\\d,.]*|\\d+(?:\\.\\d+)?%|\\b\\d{2,}\\b/g)) || []).every(n => $json.corpus.includes(n.replace(/[^\\d.,]/g, ''))) }}",
+              "type": "boolean"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "id": "842ff363-191c-4cb5-95af-f6b84ba8488e",
+      "name": "Rule Checks",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        4720,
+        -96
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "54f57689-9ab1-46c0-b714-43aa73525ab1",
+              "name": "checks_failed",
+              "value": "={{ [$json.chk_length, $json.chk_no_dashes, $json.chk_no_hashtags, $json.chk_links_real, $json.chk_top5, $json.chk_tags_valid, $json.chk_fields_filled, $json.chk_no_dup_links, $json.chk_all_processed].filter(x => !x).length }}",
+              "type": "number"
+            },
+            {
+              "id": "a35aec4d-3e8c-47cd-879d-0eb59b10bcc3",
+              "name": "checks_report",
+              "value": "={{ [[\"Brief under 3000 characters\", $json.chk_length], [\"No em-dashes or en-dashes\", $json.chk_no_dashes], [\"No hashtags\", $json.chk_no_hashtags], [\"Every link in the brief is a real fetched link\", $json.chk_links_real], [\"Brief covers 5 items or fewer\", $json.chk_top5], [\"All tags use allowed values\", $json.chk_tags_valid], [\"Every item has summary, so-what and action\", $json.chk_fields_filled], [\"No duplicate items\", $json.chk_no_dup_links], [\"Every selected item was analysed\", $json.chk_all_processed]].map(c => (c[1] ? 'PASS    ' : 'FAIL    ') + c[0]).join('\\n') + '\\n' + ($json.chk_numbers_grounded ? 'PASS    ' : 'REVIEW  ') + 'Numbers in the brief appear in the source text (can false-alarm, check by eye)' }}",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "id": "94b604fb-b6a9-42e6-8323-294f5cb0396e",
+      "name": "Check Report",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        4960,
+        -96
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "89b03d13-d3b6-4344-ba10-81aeb9254b15",
+              "name": "score",
+              "value": "={{ Math.max(0, Math.min(30, $('Settings').first().json.boost_keywords.split(',').map(k => k.trim()).filter(k => k).reduce((n, k) => n + (new RegExp('\\\\b' + k, 'i').test($json.title || '') ? 3 : 0) + (new RegExp('\\\\b' + k, 'i').test($json.snippet || '') ? 1 : 0), 0) - $('Settings').first().json.demote_keywords.split(',').map(k => k.trim()).filter(k => k).reduce((n, k) => n + (new RegExp('\\\\b' + k, 'i').test($json.title || '') ? 5 : 0), 0))) }}",
+              "type": "number"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "id": "4035f9d4-0835-4934-a178-ba208e84271d",
+      "name": "Score Items",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        2288,
+        -32
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "40a5be4b-f107-4bbf-867e-07bd1cb03f7d",
+              "name": "priority",
+              "value": "={{ ($json.score * 10000000000000 + (Date.parse($json.date) || 0)) }}",
+              "type": "number"
+            },
+            {
+              "id": "279d3c1f-2612-4ab9-84af-9181f79e5691",
+              "name": "company_rank",
+              "value": "={{ $('Score Items').all().filter(x => x.json.company === $json.company && (x.json.score * 10000000000000 + (Date.parse(x.json.date) || 0)) > ($json.score * 10000000000000 + (Date.parse($json.date) || 0))).length }}",
+              "type": "number"
+            },
+            {
+              "id": "391a3370-ae10-4347-a7d8-1fb7c20e69ff",
+              "name": "",
+              "value": "",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "id": "b5cacea6-d99d-4276-af2c-5506e096a6f9",
+      "name": "Rank In Company",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        2528,
+        -32
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "ece1173a-1661-48ba-b3c2-fc5904213e20",
+              "leftValue": "={{ $json.company_rank }}",
+              "rightValue": "={{ $('Settings').first().json.per_company_cap }}",
+              "operator": {
+                "type": "number",
+                "operation": "lt"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "7a3c95a6-05b8-474f-a144-19c69dc9c989",
+      "name": "Per-Company Cap",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.2,
+      "position": [
+        2768,
+        -32
+      ]
+    },
+    {
+      "parameters": {
+        "sortFieldsUi": {
+          "sortField": [
+            {
+              "fieldName": "priority",
+              "order": "descending"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "269834a8-9143-4812-ac15-dfe720b95465",
+      "name": "Priority Order",
+      "type": "n8n-nodes-base.sort",
+      "typeVersion": 1,
+      "position": [
+        2224,
+        304
+      ]
+    },
+    {
+      "parameters": {
+        "content": "ADD A DETERMINISTIC CHECK HERE\nLLM based evals are out of scope for this workflow currently",
+        "height": 150,
+        "width": 360,
+        "color": 4
+      },
+      "id": "43a39243-657b-4c9b-8c20-0e2fadff0240",
+      "name": "Note: ADD A PRODUCT1",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        4240,
+        -320
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Workflow Overview\nPurpose- To analyze and create a brief of recent AI Product Releases with a PM lens to be able to plan and take decisions\nTrigger source-Schedule or Manual\nInput format- Website links\nOutput format- Brief delivered over email\nPre-requisite- One time setup for log and source tables (separate workflow) \nError handling strategy- Deterministic checks (in this workflow) and separate error workflow (both reported over email)\nOwner-",
+        "height": 240,
+        "width": 464
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        1536,
+        -80
+      ],
+      "typeVersion": 1,
+      "id": "f66932f4-d86d-40ee-aba2-fe0d9ad90a48",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "Gives each item points for boost words and subtracts points for demote words",
+        "height": 80
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        2192,
+        -144
+      ],
+      "typeVersion": 1,
+      "id": "732a3c67-0d43-4629-9eab-c1825dfacff4",
+      "name": "Sticky Note1",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "content": "Orders items within each company by score, then by date",
+        "height": 80
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        2480,
+        -144
+      ],
+      "typeVersion": 1,
+      "id": "c2707fb4-7529-460d-a87a-c6bfc5ee65ed",
+      "name": "Sticky Note2",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "content": "Keeps only the top 10 per company, so one busy feed can’t crowd out the others.",
+        "height": 80
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        2752,
+        -144
+      ],
+      "typeVersion": 1,
+      "id": "0b486fcb-58f7-4396-b779-f69e54f6fa83",
+      "name": "Sticky Note3",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "content": "Why not agent node and just HTTP node?\nCheaper (often free)\nFaster\nMore deterministic\nNo memory required\nNo tool calling required",
+        "height": 192
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        2560,
+        528
+      ],
+      "typeVersion": 1,
+      "id": "5d5b5758-5cfa-4ed6-89c5-7391cba139de",
+      "name": "Sticky Note4",
+      "disabled": true
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Weekly Schedule": {
+      "main": [
+        [
+          {
+            "node": "Run Live",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Manual Test Run": {
+      "main": [
+        [
+          {
+            "node": "Run Test",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Run Live": {
+      "main": [
+        [
+          {
+            "node": "Settings",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Run Test": {
+      "main": [
+        [
+          {
+            "node": "Settings",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Settings": {
+      "main": [
+        [
+          {
+            "node": "Use Sample Items?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Use Sample Items?": {
+      "main": [
+        [
+          {
+            "node": "Sample Items",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Load Sources",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Sample Items": {
+      "main": [
+        [
+          {
+            "node": "Split Samples",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Load Sources": {
+      "main": [
+        [
+          {
+            "node": "Read Feed",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read Feed": {
+      "main": [
+        [
+          {
+            "node": "Tag Source",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Tag Source": {
+      "main": [
+        [
+          {
+            "node": "Last N Days",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Samples": {
+      "main": [
+        [
+          {
+            "node": "Remove Duplicates",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Last N Days": {
+      "main": [
+        [
+          {
+            "node": "Remove Duplicates",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Remove Duplicates": {
+      "main": [
+        [
+          {
+            "node": "Score Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Cap Items": {
+      "main": [
+        [
+          {
+            "node": "Analyze Item",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Analyze Item": {
+      "main": [
+        [
+          {
+            "node": "Parse Reply",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse Reply": {
+      "main": [
+        [
+          {
+            "node": "Shape Item",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Shape Item": {
+      "main": [
+        [
+          {
+            "node": "Item Log Row",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Pack Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Item Log Row": {
+      "main": [
+        [
+          {
+            "node": "Log Item",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Pack Items": {
+      "main": [
+        [
+          {
+            "node": "Write Brief",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Write Brief": {
+      "main": [
+        [
+          {
+            "node": "Clean Brief",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Clean Brief": {
+      "main": [
+        [
+          {
+            "node": "Brief Log Row",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Run Stats",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Brief Log Row": {
+      "main": [
+        [
+          {
+            "node": "Log Brief",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Run Stats": {
+      "main": [
+        [
+          {
+            "node": "Prep Checks",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Compose Email": {
+      "main": [
+        [
+          {
+            "node": "Send Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prep Checks": {
+      "main": [
+        [
+          {
+            "node": "Rule Checks",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Rule Checks": {
+      "main": [
+        [
+          {
+            "node": "Check Report",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Report": {
+      "main": [
+        [
+          {
+            "node": "Compose Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Score Items": {
+      "main": [
+        [
+          {
+            "node": "Rank In Company",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Rank In Company": {
+      "main": [
+        [
+          {
+            "node": "Per-Company Cap",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Per-Company Cap": {
+      "main": [
+        [
+          {
+            "node": "Priority Order",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Priority Order": {
+      "main": [
+        [
+          {
+            "node": "Cap Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "timeSavedMode": "fixed",
+    "callerPolicy": "workflowsFromSameOwner",
+    "availableInMCP": false
+  },
+  "nodeGroups": [],
+  "tags": []
+}
