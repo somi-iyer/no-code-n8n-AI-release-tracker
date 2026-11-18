@@ -67,7 +67,7 @@ Never paste a key or App Password into a node field, and never commit them.
 - **Pause a source:** set `enabled` to false.
 - **Switch model or provider:** change `llm_base_url` and `llm_model` in Settings, and update the key in the `LLM API Key` credential.
 - **Check token use:** open the `llm_log` table and filter `mode = live`.
-- **Change the voice or tags:** edit the prompts in Settings. If you change allowed tag values, also update the lists in the **Rule Checks** node.
+- **Change the voice:** edit the prompts in Settings.
 
 ## Troubleshooting
 
