@@ -102,7 +102,8 @@ https://developers.googleblog.com/build-full-stack-android-apps-with-gemini-in-g
 Why it matters: This enables AI agents to autonomously handle financial transactions with user approval.
 https://openai.com/index/introducing-chatgpt-wallet
 
-The Build lens showed up most this week.
+The **Build** lens showed up most this week.
+
 
 === ALL ITEMS (25) ===  
 [Model Release | Build | Plan this quarter | High] OpenAI: Introducing GPT-6.2 Astra and Sol
@@ -197,24 +198,23 @@ Top 10 not-analysed items by priority score:
 - [OpenAI] A step toward defining the Standard Model on a lattice (score 0, cut by per-company cap)
 
 === RULE CHECKS (9 of 9 passed) ===  
-PASS    Brief under 3000 characters
-PASS    No em-dashes or en-dashes
-PASS    No hashtags
-PASS    Every link in the brief is a real fetched link
-PASS    Brief covers 5 items or fewer
-PASS    All tags use allowed values
-PASS    Every item has summary, so-what and action
-PASS    No duplicate items
-PASS    Every selected item was analysed
-PASS    Numbers in the brief appear in the source text (can false-alarm, check by eye)
+- PASS    Brief under 3000 characters
+- PASS    No em-dashes or en-dashes
+- PASS    No hashtags
+- PASS    Every link in the brief is a real fetched link
+- PASS    Brief covers 5 items or fewer
+- PASS    All tags use allowed values
+- PASS    Every item has summary, so-what and action
+- PASS    No duplicate items
+- PASS    Every selected item was analysed
+- PASS    Numbers in the brief appear in the source text (can false-alarm, check by eye)
 
 === RUN STATS ===  
-Mode: live
-Model: gemini-3.5-flash-lite
-Tokens in / out: 12996 / 3027
-Estimated cost (USD): 0.0000
+- Mode: live
+- Model: gemini-3.5-flash-lite
+- Tokens in / out: 12996 / 3027
+- Estimated cost (USD): 0.0000
 
----
 This email was sent automatically with n8n
 https://n8n.io
 
