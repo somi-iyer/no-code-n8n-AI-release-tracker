@@ -1,5 +1,6 @@
 # Architecture
 
+n8n AI Release Tracker Workflow  
 ![Workflow](images/workflow.png)
 
 The project is three n8n workflows. Only the first runs every week.
