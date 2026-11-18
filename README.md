@@ -101,7 +101,6 @@ PASS    Every selected item was analysed
 PASS    Numbers in the brief appear in the source text (can false-alarm, check by eye)
 ```
 
-<!-- TODO: add a screenshot of the workflow canvas at docs/images/workflow.png and a sample brief -->
 
 ## Design decisions
 
@@ -162,5 +161,13 @@ Step by step: [docs/setup.md](docs/setup.md)
 n8n Community Edition (self-hosted, Docker), n8n Data tables, Google Gemini API (OpenAI-compatible endpoint, free tier), Gmail SMTP.
 
 The Anthropic and Google Developers feeds come from the open-source [rss-feeds](https://github.com/Olshansk/rss-feeds) project by Olshansk. The OpenAI and Google DeepMind feeds are official.
+
+## Intention
+
+Light weight no code prototyping/automation learnt by connecting to LLM (via HTTP node) in n8n for purpose of analyzing and summarizing AI releases only, at 0 cost. 
+This can be easily tailored to do any Product's competitor release analysis and brief. 
+Only deterministic checks are in scope as of now and native Agent nodes in n8n have not been explored yet as they not required for this simple use-case. (memory/tooling/self correction loops not required)
+It was easier to make tweeks in .md files in this repo as I had learnt/experimented with them earlier. See [lessons-learnt-markdown](https://github.com/somi-iyer/allocation-algorithm-simulation/blob/main/lessons_learnt_md_file_formatting.md)
+
 
 <!-- TODO: add a LICENSE file (MIT is a common choice) and a license line here -->
