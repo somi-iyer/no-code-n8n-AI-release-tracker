@@ -105,7 +105,7 @@ https://openai.com/index/introducing-chatgpt-wallet
 
 The Build lens showed up most this week.
 
-=== ALL ITEMS (25) ===
+=== ALL ITEMS (25) ===  
 [Model Release | Build | Plan this quarter | High] OpenAI: Introducing GPT-6.2 Astra and Sol
 https://openai.com/index/introducing-gpt-6-2-astra-sol
 
@@ -181,7 +181,7 @@ https://developers.googleblog.com/accelerating-development-for-massive-git-repos
 [Other | Build | Watch | Low] Anthropic: The Claude Tag guide for startups
 https://claude.com/resources/articles/claude-tag-guide-for-startups
 
-=== COVERAGE ===
+=== COVERAGE ===  
 Fetched after date filter and duplicates: 45
 Analysed: 25
 Not analysed: 20
@@ -197,7 +197,7 @@ Top 10 not-analysed items by priority score:
 - [OpenAI] Advancing computer-use agents for healthcare teams (score 0, cut by per-company cap)
 - [OpenAI] A step toward defining the Standard Model on a lattice (score 0, cut by per-company cap)
 
-=== RULE CHECKS (9 of 9 passed) ===
+=== RULE CHECKS (9 of 9 passed) ===  
 PASS    Brief under 3000 characters
 PASS    No em-dashes or en-dashes
 PASS    No hashtags
@@ -209,7 +209,7 @@ PASS    No duplicate items
 PASS    Every selected item was analysed
 PASS    Numbers in the brief appear in the source text (can false-alarm, check by eye)
 
-=== RUN STATS ===
+=== RUN STATS ===  
 Mode: live
 Model: gemini-3.5-flash-lite
 Tokens in / out: 12996 / 3027
