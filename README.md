@@ -74,7 +74,8 @@ Full node list, data tables and settings: [docs/architecture.md](docs/architectu
 
 ## Example run
 
-Real output from a test run on live feeds
+Real output from a test run on live feeds  
+
 Email title: AI release brief: 18 Nov 2026
 
 Email body:
