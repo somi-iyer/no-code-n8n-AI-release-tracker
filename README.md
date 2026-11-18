@@ -75,9 +75,112 @@ Full node list, data tables and settings: [docs/architecture.md](docs/architectu
 
 ## Example run
 
-Real output from a test run on live feeds, shortened for display. The coverage section tells the reader what was left out, and why.
+Real output from a test run on live feeds
+Email title: AI release brief: 18 Nov 2026
 
-```text
+Email body:
+Characters: 1358 / 3000
+
+This brief covers the top product updates and releases in AI this week.
+
+→ Google: Gemini 4 Hydrogen: a faster model for general purpose robotics
+Why it matters: This model and plugin combo lets teams build and test real-to-sim-to-real robotic applications much faster.
+https://developers.googleblog.com/gemini-hydrogen-for-robotics/
+
+→ Anthropic: Operate Claude Managed Agents inside your security perimeter
+Why it matters: This feature helps PMs deploy AI agents while keeping data and credentials inside their company security perimeter.
+https://claude.com/resources/articles/self-hosted-claude-managed-agents
+
+→ OpenAI: Introducing GPT-6.2 Astra and Sol
+Why it matters: Lower costs and better computer use capabilities enable you to build more advanced AI workflows.
+https://openai.com/index/introducing-gpt-6-2-astra-sol
+
+→ Google: Build full-stack Android apps with Gemini in Google AI Studio
+Why it matters: This feature significantly lowers the effort required to prototype and launch full-stack mobile applications.
+https://developers.googleblog.com/build-full-stack-android-apps-with-gemini-in-google-ai-studio/
+
+→ OpenAI: Introducing ChatGPT Wallet
+Why it matters: This enables AI agents to autonomously handle financial transactions with user approval.
+https://openai.com/index/introducing-chatgpt-wallet
+
+The Build lens showed up most this week.
+
+=== ALL ITEMS (25) ===
+[Model Release | Build | Plan this quarter | High] OpenAI: Introducing GPT-6.2 Astra and Sol
+https://openai.com/index/introducing-gpt-6-2-astra-sol
+
+[New Feature | Compete | Watch | Medium] OpenAI: Introducing ChatGPT for Sales
+https://openai.com/index/introducing-chatgpt-for-sales
+
+[Policy and Safety | Risk | Watch | Low] OpenAI: Strengthening the fight against online child sexual abuse with new tools and support
+https://openai.com/index/strengthening-online-child-safety
+
+[Other | Compete | Watch | Low] OpenAI: The King’s Trust and OpenAI launch £1m partnership
+https://openai.com/index/the-kings-trust-and-openai
+
+[Dev Tooling | Build | Watch | Medium] Google: Unlocking Stable On-Policy RL on TPU with Bitwise-Zero Train–Inference Mismatch
+https://developers.googleblog.com/unlocking-stable-on-policy-rl-on-tpu-with-bitwise-zero-traininference-mismatch/
+
+[Other | Compete | Watch | Low] OpenAI: Our new blog for science
+https://openai.com/index/our-new-blog-for-science
+
+[New Feature | Build | Plan this quarter | High] OpenAI: Introducing ChatGPT Wallet
+https://openai.com/index/introducing-chatgpt-wallet
+
+[Policy and Safety | Risk | Watch | Low] OpenAI: Supporting research on AI and children’s safety
+https://openai.com/index/children-first-declaration
+
+[New Feature | Build | Plan this quarter | High] Anthropic: Introducing Claude for Manufacturing
+https://claude.com/resources/articles/claude-for-manufacturing
+
+[Other | Compete | Watch | Low] OpenAI: Introducing OpenAI for Chile
+https://openai.com/index/introducing-openai-for-chile
+
+[New Feature | Compete | Watch | Medium] OpenAI: Broadening access to AI for scientists
+https://openai.com/index/expanding-chatgpt-for-academic-researchers
+
+[Model Release | Compete | Watch | Low] Google: Introducing Gemini 4 Hydrogen
+https://deepmind.google/blog/introducing-gemini-4-hydrogen/
+
+[New Feature | Build | Watch | Low] Anthropic: Introducing Claude Meetings
+https://claude.com/resources/articles/claude-meetings
+
+[Model Release | Compete | Plan this quarter | Medium] OpenAI: Astra for Law leads in legal intelligence
+https://openai.com/index/astra-law-6-2
+
+[Dev Tooling | Build | Plan this quarter | Medium] Google: TPU Model Design Considerations and Optimization Guide
+https://developers.googleblog.com/tpu-model-design-considerations-and-optimization-guide/
+
+[Model Release | Build | Plan this quarter | High] Google: Gemini 4 Hydrogen: a faster model for general purpose robotics
+https://developers.googleblog.com/gemini-hydrogen-for-robotics/
+
+[Policy and Safety | Risk | Plan this quarter | Medium] Google: Securing Your Agents: A Hands-On Guide to Agent Anomaly Detection
+https://developers.googleblog.com/securing-your-agents-a-hands-on-guide-to-agent-anomaly-detection/
+
+[New Feature | Cost | Plan this quarter | Medium] Google: Agents are sessions, not requests: size GKE node pools for AI agent sessions
+https://developers.googleblog.com/agents-are-sessions-not-requests-size-gke-node-pools-for-ai-agent-sessions/
+
+[New Feature | Risk | Plan this quarter | High] Anthropic: Operate Claude Managed Agents inside your security perimeter
+https://claude.com/resources/articles/self-hosted-claude-managed-agents
+
+[New Feature | Compete | Watch | Low] Anthropic: J. Crew brings its signature approach to styling to life with Claude
+https://claude.com/resources/articles/j-crew-style-advisor-with-claude
+
+[New Feature | Risk | Plan this quarter | Medium] Google: How Agent Anomaly Detection scores on benchmarks we didn't write
+https://developers.googleblog.com/how-agent-anomaly-detection-scores-on-benchmarks-we-didnt-write/
+
+[Pricing and Limits | Cost | Watch | Low] Anthropic: Linked billing on the Claude Platform
+https://claude.com/resources/articles/linked-billing-on-claude-platform
+
+[New Feature | Build | Plan this quarter | High] Google: Build full-stack Android apps with Gemini in Google AI Studio
+https://developers.googleblog.com/build-full-stack-android-apps-with-gemini-in-google-ai-studio/
+
+[Dev Tooling | Build | Watch | Medium] Google: Accelerating development for massive Git repositories
+https://developers.googleblog.com/accelerating-development-for-massive-git-repositories/
+
+[Other | Build | Watch | Low] Anthropic: The Claude Tag guide for startups
+https://claude.com/resources/articles/claude-tag-guide-for-startups
+
 === COVERAGE ===
 Fetched after date filter and duplicates: 45
 Analysed: 25
@@ -85,8 +188,14 @@ Not analysed: 20
 Top 10 not-analysed items by priority score:
 - [OpenAI] More ways to move care forward with ChatGPT for Healthcare (score 2, cut by per-company cap)
 - [OpenAI] At Holiday Extras, dots get to work before anyone asks (score 1, cut by per-company cap)
+- [OpenAI] Holiday Extras is rethinking what it can build with Codex (score 1, cut by per-company cap)
 - [OpenAI] Strengthening NATO and allied cyber defenses with AI (score 0, cut by per-company cap)
-- (7 more items not shown here)
+- [OpenAI] Science at the Frontier: How scientists use ChatGPT (score 0, cut by per-company cap)
+- [OpenAI] How Revolut raises ambition without lowering the bar (score 0, cut by per-company cap)
+- [OpenAI] LVMH’s Media Division announces strategic partnership with OpenAI (score 0, cut by per-company cap)
+- [OpenAI] Our first phase of embedded assessments (score 0, cut by per-company cap)
+- [OpenAI] Advancing computer-use agents for healthcare teams (score 0, cut by per-company cap)
+- [OpenAI] A step toward defining the Standard Model on a lattice (score 0, cut by per-company cap)
 
 === RULE CHECKS (9 of 9 passed) ===
 PASS    Brief under 3000 characters
@@ -99,7 +208,16 @@ PASS    Every item has summary, so-what and action
 PASS    No duplicate items
 PASS    Every selected item was analysed
 PASS    Numbers in the brief appear in the source text (can false-alarm, check by eye)
-```
+
+=== RUN STATS ===
+Mode: live
+Model: gemini-3.5-flash-lite
+Tokens in / out: 12996 / 3027
+Estimated cost (USD): 0.0000
+
+---
+This email was sent automatically with n8n
+https://n8n.io
 
 
 ## Design decisions
