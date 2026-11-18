@@ -184,9 +184,9 @@ https://claude.com/resources/articles/claude-tag-guide-for-startups
 === COVERAGE ===  
 - Fetched after date filter and duplicates: 45
 - Analysed: 25
-- Not analysed: 20
+- Not analysed: 20  
 
-- Top 10 not-analysed items by priority score:
+Top 10 not-analysed items by priority score:
 - [OpenAI] More ways to move care forward with ChatGPT for Healthcare (score 2, cut by per-company cap)
 - [OpenAI] At Holiday Extras, dots get to work before anyone asks (score 1, cut by per-company cap)
 - [OpenAI] Holiday Extras is rethinking what it can build with Codex (score 1, cut by per-company cap)
