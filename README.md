@@ -17,9 +17,8 @@ Newsletters summarise the news. This workflow answers a narrower question: **wha
 → Caps items per company so one busy feed cannot crowd out the others
 → Sends each selected item to an LLM for tags, a summary and a suggested PM action
 → Writes a short brief of the top 5 items, in plain language
+→ It also tells which "tags" or "lens" showed up most
 → Runs 10 rule checks on the output, then emails a draft for human review
-
-Nothing is posted automatically. The output is a draft that a person reads first.
 
 ## Architecture
 
@@ -282,10 +281,10 @@ The Anthropic and Google Developers feeds come from the open-source [rss-feeds](
 
 ## Intention
 
-Light weight no code prototyping/automation learnt by connecting to LLM (via HTTP node) in n8n for purpose of analyzing and summarizing AI releases only, at 0 cost. 
-This can be easily tailored to do any Product's competitor release analysis and brief. 
-Only deterministic checks are in scope as of now and native Agent nodes in n8n have not been explored yet as they not required for this simple use-case. (memory/tooling/self correction loops not required)
-It was easier to make tweeks in .md files in this repo as I had learnt/experimented with them earlier. See [lessons-learnt-markdown](https://github.com/somi-iyer/allocation-algorithm-simulation/blob/main/lessons_learnt_md_file_formatting.md)
+- Light weight no code prototyping/automation learnt by connecting to LLM (via HTTP node) in n8n for purpose of analyzing and summarizing AI releases only, at 0 cost. 
+- This can be easily tailored to do any Product's competitor release analysis and brief. 
+- Only deterministic checks are in scope as of now and native Agent nodes in n8n have not been explored yet as they not required for this simple use-case. (memory/tooling/self correction loops not required)
+- It was easier to make tweeks in .md files in this repo as I had learnt/experimented with them earlier. See [lessons-learnt-markdown](https://github.com/somi-iyer/allocation-algorithm-simulation/blob/main/lessons_learnt_md_file_formatting.md)
 
 
 <!-- TODO: add a LICENSE file (MIT is a common choice) and a license line here -->
