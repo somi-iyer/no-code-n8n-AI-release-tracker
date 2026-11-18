@@ -1,0 +1,55 @@
+{
+  "name": "AI Release Tracker - error alert",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "e3d515a1-7187-4365-aa38-c9200f49abc0",
+      "name": "Error Trigger",
+      "type": "n8n-nodes-base.errorTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "fromEmail": "you@example.com",
+        "toEmail": "you@example.com",
+        "subject": "={{ 'FAILED: ' + $json.workflow.name }}",
+        "emailFormat": "text",
+        "text": "={{ 'Workflow: ' + $json.workflow.name + '\\nFailed at: ' + $json.execution.lastNodeExecuted + '\\nError: ' + $json.execution.error.message + '\\nOpen: ' + $json.execution.url }}",
+        "options": {}
+      },
+      "id": "b32d475a-513c-43e2-b03c-4862a88fbe33",
+      "name": "Send Failure Email",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        240,
+        0
+      ]
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Error Trigger": {
+      "main": [
+        [
+          {
+            "node": "Send Failure Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "nodeGroups": [],
+  "tags": []
+}

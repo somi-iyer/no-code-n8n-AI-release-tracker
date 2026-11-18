@@ -1,0 +1,300 @@
+{
+  "name": "AI Release Tracker - one-time setup",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "c27c0bd5-0258-4fad-bd8b-064ff5a45baf",
+      "name": "Run Once",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        256,
+        160
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "table",
+        "operation": "create",
+        "tableName": "sources",
+        "columns": {
+          "column": [
+            {
+              "name": "company"
+            },
+            {
+              "name": "name"
+            },
+            {
+              "name": "url"
+            },
+            {
+              "name": "enabled",
+              "type": "boolean"
+            }
+          ]
+        },
+        "options": {
+          "createIfNotExists": true
+        }
+      },
+      "id": "8dc1b6a9-5413-4d9d-92a7-d41300eb683e",
+      "name": "Create sources table",
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1,
+      "position": [
+        496,
+        160
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "table",
+        "operation": "create",
+        "tableName": "llm_log",
+        "columns": {
+          "column": [
+            {
+              "name": "run_id"
+            },
+            {
+              "name": "mode"
+            },
+            {
+              "name": "step"
+            },
+            {
+              "name": "model"
+            },
+            {
+              "name": "company"
+            },
+            {
+              "name": "title"
+            },
+            {
+              "name": "link"
+            },
+            {
+              "name": "category"
+            },
+            {
+              "name": "pm_lens"
+            },
+            {
+              "name": "urgency"
+            },
+            {
+              "name": "impact"
+            },
+            {
+              "name": "so_what"
+            },
+            {
+              "name": "prompt_tokens",
+              "type": "number"
+            },
+            {
+              "name": "completion_tokens",
+              "type": "number"
+            },
+            {
+              "name": "est_cost_usd",
+              "type": "number"
+            }
+          ]
+        },
+        "options": {
+          "createIfNotExists": true
+        }
+      },
+      "id": "55a3c370-04c6-4131-b224-ba276fb85d3b",
+      "name": "Create llm_log table",
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1,
+      "position": [
+        736,
+        160
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "{\n \"rows\": [\n  {\n   \"company\": \"OpenAI\",\n   \"name\": \"OpenAI News\",\n   \"url\": \"https://openai.com/news/rss.xml\",\n   \"enabled\": true\n  },\n  {\n   \"company\": \"Anthropic\",\n   \"name\": \"Anthropic News (community feed)\",\n   \"url\": \"https://raw.githubusercontent.com/Olshansk/rss-feeds/main/feeds/feed_anthropic_news.xml\",\n   \"enabled\": true\n  },\n  {\n   \"company\": \"Anthropic\",\n   \"name\": \"Claude Blog (community feed)\",\n   \"url\": \"https://raw.githubusercontent.com/Olshansk/rss-feeds/main/feeds/feed_claude.xml\",\n   \"enabled\": true\n  },\n  {\n   \"company\": \"Google\",\n   \"name\": \"Google DeepMind Blog\",\n   \"url\": \"https://deepmind.google/blog/rss.xml\",\n   \"enabled\": true\n  },\n  {\n   \"company\": \"Google\",\n   \"name\": \"Google Developers Blog AI (community feed)\",\n   \"url\": \"https://raw.githubusercontent.com/Olshansk/rss-feeds/main/feeds/feed_google_ai.xml\",\n   \"enabled\": true\n  }\n ]\n}",
+        "options": {}
+      },
+      "id": "83f5f656-af1e-4ce2-a1ad-bf67da727043",
+      "name": "Seed Sources",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        976,
+        160
+      ]
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "rows",
+        "options": {}
+      },
+      "id": "85887c92-09e0-4cdc-bda4-55b2c40f61f6",
+      "name": "Split Rows",
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        1216,
+        160
+      ]
+    },
+    {
+      "parameters": {
+        "dataTableId": {
+          "__rl": true,
+          "mode": "name",
+          "value": "sources"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {
+            "enabled": false
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "company",
+              "displayName": "company",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "name",
+              "displayName": "name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "url",
+              "displayName": "url",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "enabled",
+              "displayName": "enabled",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "boolean",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "474aba01-44d7-494a-95e0-695ac621eb0b",
+      "name": "Insert Sources",
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1,
+      "position": [
+        1456,
+        160
+      ]
+    },
+    {
+      "parameters": {
+        "content": "RUN THIS ONCE\nCreates the sources and llm_log data tables and adds 5 starter feeds. Running it twice adds the feeds twice, so run once, then archive this workflow.",
+        "height": 150,
+        "width": 520,
+        "color": 4
+      },
+      "id": "7a2f90b7-03af-48d1-8f0f-ba94b7731737",
+      "name": "Note: RUN THIS ONCE",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        256,
+        -48
+      ]
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Run Once": {
+      "main": [
+        [
+          {
+            "node": "Create sources table",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create sources table": {
+      "main": [
+        [
+          {
+            "node": "Create llm_log table",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create llm_log table": {
+      "main": [
+        [
+          {
+            "node": "Seed Sources",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Seed Sources": {
+      "main": [
+        [
+          {
+            "node": "Split Rows",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Rows": {
+      "main": [
+        [
+          {
+            "node": "Insert Sources",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "nodeGroups": [],
+  "tags": []
+}
