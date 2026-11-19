@@ -284,7 +284,7 @@ The Anthropic and Google Developers feeds come from the open-source [rss-feeds](
 ## Intention
 
 - Light weight no code prototyping/automation learnt by connecting to LLM (via HTTP node) in n8n for purpose of analyzing and summarizing AI releases only, at 0 cost. 
-- This can be easily tailored to do any Product's competitor release analysis and brief. 
+- This can be taken as reference and tailored to do Product's competitor release analysis and brief. 
 - Only deterministic checks are in scope as of now and native Agent nodes in n8n have not been explored yet as they not required for this simple use-case. (memory/tooling/self correction loops not required)
 - It was easier to make tweeks in .md files in this repo as I had learnt/experimented with them earlier. See [lessons-learnt-markdown](https://github.com/somi-iyer/allocation-algorithm-simulation/blob/main/lessons_learnt_md_file_formatting.md)
 
