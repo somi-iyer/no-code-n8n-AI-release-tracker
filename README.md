@@ -1,4 +1,4 @@
-# AI Release Tracker (no-code, n8n)
+# AI Vendor Release Tracker (no-code, n8n)
 
 A free, self-hosted n8n workflow that watches OpenAI, Anthropic and Google, and writes a weekly brief on **what changed and why it matters to product managers**. Every item carries a category tag, a PM lens, an urgency and a source link.
 
